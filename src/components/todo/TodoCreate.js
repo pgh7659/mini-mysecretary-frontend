@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { MdAdd } from 'react-icons/md';
 import styled, { css } from 'styled-components';
-import { useTodoDispatch, useTodoNextId } from '../../context/todo/TodoContext';
-
+import { useTodoDispatch } from '../../context/todo/TodoContext';
+import todoService from '../../lib/axios/service/todoService';
 
 const CircleButton = styled.button`
   background: #38d9a9;
@@ -32,7 +32,7 @@ const CircleButton = styled.button`
   display: flex;
 
   transition: 0.125s all ease-in;
-  ${props =>
+  ${(props) =>
     props.open &&
     css`
       background: #ff6b6b;
@@ -43,8 +43,7 @@ const CircleButton = styled.button`
         background: #fa5252;
       }
       transform: translate(-50%, 50%) rotate(45deg);
-    `
-  }
+    `}
 `;
 const InsertFormPositioner = styled.div`
   width: 100%;
@@ -52,11 +51,11 @@ const InsertFormPositioner = styled.div`
   left: 0;
   position: absolute;
 `;
-const InsertForm = styled.form`
+const InsertForm = styled.div`
   background: #f8f9fa;
-  padding-left: 32px;
+  padding-left: 10px;
   padding-top: 32px;
-  padding-right: 32px;
+  padding-right: 10px;
   padding-bottom: 72px;
 
   border-bottom-left-radius: 16px;
@@ -67,10 +66,24 @@ const Input = styled.input`
   padding: 12px;
   border-radius: 4px;
   border: 1px solid #dee2e6;
-  width: 100%;
+  width: 80%;
   outline: none;
   font-size: 18px;
   box-sizing: border-box;
+`;
+const InsertButton = styled.button`
+  color: #ffffff;
+  height: 47px;
+  background-color: #20c997;
+  padding: 12px;
+  border-radius: 4px;
+  width: 20%;
+  outline: none;
+  border: 1px solid #dee2e6;
+  font-size: 18px;
+  &:hover {
+    background: #228be6;
+  }
 `;
 
 function TodoCreate() {
@@ -78,45 +91,51 @@ function TodoCreate() {
   const [value, setValue] = useState('');
 
   const dispatch = useTodoDispatch();
-  const nextId = useTodoNextId();
 
   const onToggle = () => setOpen(!open);
-  const onChange = e => setValue(e.target.value);
-  const onSubmit = e => {
-    dispatch({
-      type: 'CREATE', 
-      todo: {
-        id: nextId.current,
-        content: value
-      }
-    });
+  const onChange = (e) => setValue(e.target.value);
+  const onCreate = async (e) => {
+    if (e.type === 'keyup' && e.key !== 'Enter') {
+      return;
+    }
 
-    setValue('');
-    setOpen(false);
-    nextId.current += 1;
+    const todo = {
+      title: value,
+    };
+
+    const response = await todoService.save(todo);
+    if (response.status === 200) {
+      dispatch({
+        type: 'CREATE',
+        todo: { ...todo, id: response.data },
+      });
+
+      setValue('');
+      setOpen(false);
+    }
   };
 
   return (
     <>
-      {
-       open && (
-         <InsertFormPositioner>
-           <InsertForm onSubmit={onSubmit}>
-             <Input
-              autoFocus 
-              placeholder="내용을 입력 후, Enter를 누르세요"
+      {open && (
+        <InsertFormPositioner>
+          <InsertForm>
+            <Input
+              autoFocus
+              placeholder="내용을 입력 후, Enter를 누르세요."
               onChange={onChange}
+              onKeyUp={onCreate}
               value={value}
             />
-           </InsertForm>
-         </InsertFormPositioner>
-       ) 
-      }
+            <InsertButton onClick={onCreate}>Enter</InsertButton>
+          </InsertForm>
+        </InsertFormPositioner>
+      )}
       <CircleButton onClick={onToggle} open={open}>
         <MdAdd />
       </CircleButton>
     </>
-  )
+  );
 }
 
 export default TodoCreate;

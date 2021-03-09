@@ -49,12 +49,12 @@ const dateStringKo = today.toLocaleDateString('ko-KR', {
   day: 'numeric',
 });
 const dayNameKo = today.toLocaleDateString('ko-KR', {
-  weekday: 'long'
-})
+  weekday: 'long',
+});
 
 function TodoHead() {
   const todos = useTodoState();
-  const undoneTodos = todos.filter(todo => !todo.done);
+  const undoneTodos = todos.filter((todo) => !todo.done);
 
   return (
     <TodoHeadBlock>
@@ -62,7 +62,7 @@ function TodoHead() {
       <div className="day">{dayNameKo}</div>
       <div className="tasks-left">{`할 일 ${undoneTodos.length}개 남음`}</div>
     </TodoHeadBlock>
-  )
+  );
 }
 
 export default TodoHead;

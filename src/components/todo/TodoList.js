@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useTodoState } from '../../context/todo/TodoContext';
+import { useTodoDispatch, useTodoState } from '../../context/todo/TodoContext';
+import todoService from '../../lib/axios/service/todoService';
 import TodoItem from './TodoItem';
 
 const TodoListBlock = styled.div`
@@ -11,22 +12,32 @@ const TodoListBlock = styled.div`
 `;
 
 function TodoList() {
+  const dispatch = useTodoDispatch();
+  useEffect(() => {
+    const getList = async () => {
+      const response = await todoService.getList();
+      if (response.status === 200) {
+        dispatch({ type: 'GET_LIST', todos: response.data });
+      }
+    };
+
+    getList();
+  }, []);
+
   const todos = useTodoState();
+
   return (
     <TodoListBlock>
-      {
-        todos.map(todo => (
-          <TodoItem
-            key={todo.id}
-            id={todo.id}
-            content={todo.content}
-            done={todo.done}
-          />
-        ))
-      }
+      {todos.map((todo) => (
+        <TodoItem
+          key={todo.id}
+          id={todo.id}
+          title={todo.title}
+          done={todo.done}
+        />
+      ))}
     </TodoListBlock>
-    
-  )
+  );
 }
 
 export default TodoList;

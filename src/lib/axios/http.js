@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 // Interceptor 설정 !!
 // const interceptor = axios.interceptors;
@@ -8,5 +8,5 @@ export default {
   get: axios.get,
   post: axios.post,
   put: axios.put,
-  delete: axios.delete
-}
+  delete: axios.delete,
+};

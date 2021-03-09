@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { MdDone, MdDelete } from 'react-icons/md';
 import { useTodoDispatch } from '../../context/todo/TodoContext';
+import todoService from '../../lib/axios/service/todoService';
 
 const Remove = styled.div`
   display: flex;
@@ -13,7 +14,7 @@ const Remove = styled.div`
   &:hover {
     color: #ff6b6b;
   }
-  display:none;
+  display: none;
 `;
 
 const TodoItemBlock = styled.div`
@@ -39,43 +40,55 @@ const CheckCircle = styled.div`
   justify-content: center;
   margin-right: 20px;
   cursor: pointer;
-  ${props =>
+  ${(props) =>
     props.done &&
     css`
       border: 1px; solid #38d9a9;
       color: #38d9a9;
-    `
-  }
+    `}
 `;
 
 const Content = styled.div`
   flex: 1;
   font-size: 21px;
   color: #495057;
-  ${props =>
+  ${(props) =>
     props.done &&
     css`
       color: #ced4da;
-    `
-  }
+    `}
 `;
 
-function TodoItem({ id, done, content }) {
+function TodoItem({ id, done, title }) {
   const dispatch = useTodoDispatch();
-  const onToggle = () => dispatch({type: 'TOGGLE', id});
-  const onRemove = () => dispatch({type: 'REMOVE', id});
+  const onToggle = async () => {
+    console.log('toggle');
+    console.log(done);
+    const response = await todoService.updateDone(id, !done);
+    console.log(response);
+    if (response.status === 200) {
+      dispatch({ type: 'TOGGLE', id });
+    }
+  };
+  const onRemove = async () => {
+    const response = await todoService.delete(id);
+    console.log(response);
+    if (response.status === 200) {
+      dispatch({ type: 'REMOVE', id });
+    }
+  };
 
   return (
     <TodoItemBlock>
       <CheckCircle done={done} onClick={onToggle}>
         {done && <MdDone />}
       </CheckCircle>
-      <Content done={done}>{content}</Content>
+      <Content done={done}>{title}</Content>
       <Remove onClick={onRemove}>
         <MdDelete />
       </Remove>
     </TodoItemBlock>
-  )
+  );
 }
 
 export default React.memo(TodoItem);
