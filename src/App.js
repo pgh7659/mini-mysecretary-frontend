@@ -1,6 +1,8 @@
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
+import CalendarContainer from './containers/CalendarContainer';
 import TodoContainer from './containers/TodoContainer';
+import { CalendarProvider } from './context/calendar/CalendarContext';
 import { TodoProvider } from './context/todo/TodoContext';
 
 const GlobalStyle = createGlobalStyle`
@@ -22,14 +24,18 @@ function App() {
 
   return (
     <>
-      <TodoProvider>
-        <GlobalStyle />
-        <TodoContainer/>
-      </TodoProvider>
-        {/* <Menu /> */}
-        {/* <Hello text="Hello React!" color="red" /> */}
-        {/* <Hello color="blue" visible={showable}/> */}
-        {/* <Choice name="showhide" mapList={[{text:"SHOW", value:true}, {text:"HIDE", value:false}]} clickHandler={showableHandler}/> */}
+      <CalendarProvider>
+        <TodoProvider>
+          <GlobalStyle />
+          <TodoContainer />
+        </TodoProvider>
+
+        <CalendarContainer />
+      </CalendarProvider>
+      {/* <Menu /> */}
+      {/* <Hello text="Hello React!" color="red" /> */}
+      {/* <Hello color="blue" visible={showable}/> */}
+      {/* <Choice name="showhide" mapList={[{text:"SHOW", value:true}, {text:"HIDE", value:false}]} clickHandler={showableHandler}/> */}
     </>
   );
 }

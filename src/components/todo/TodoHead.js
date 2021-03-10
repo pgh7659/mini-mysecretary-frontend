@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useCalendarDispatch } from '../../context/calendar/CalendarContext';
 import { useTodoState } from '../../context/todo/TodoContext';
 
 const TodoHeadBlock = styled.div`
@@ -12,11 +13,14 @@ const TodoHeadBlock = styled.div`
     margin: 0;
     font-size: 36px;
     color: #343a40;
+    cursor: pointer;
+    text-align: center;
   }
   .day {
     margin-top: 4px;
     color: #868e96;
     font-size: 21px;
+    text-align: center;
   }
   .tasks-left {
     color: #20c997;
@@ -53,12 +57,18 @@ const dayNameKo = today.toLocaleDateString('ko-KR', {
 });
 
 function TodoHead() {
-  const todos = useTodoState();
-  const undoneTodos = todos.filter((todo) => !todo.done);
+  const todoState = useTodoState();
+  const undoneTodos = todoState.filter((todo) => !todo.done);
+
+  const calendarDispatch = useCalendarDispatch();
+  console.log(calendarDispatch);
+  const onClick = () => {
+    calendarDispatch({ type: 'TOGGLE' });
+  };
 
   return (
     <TodoHeadBlock>
-      <h1>{dateStringKo}</h1>
+      <h1 onClick={onClick}>{dateStringKo}</h1>
       <div className="day">{dayNameKo}</div>
       <div className="tasks-left">{`할 일 ${undoneTodos.length}개 남음`}</div>
     </TodoHeadBlock>

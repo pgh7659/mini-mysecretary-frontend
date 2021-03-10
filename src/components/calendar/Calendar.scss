@@ -1,0 +1,48 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 6;
+
+  .calendar-modal {
+    padding-top: 30px;
+    width: 400px;
+    height: 400px;
+    margin-top: 200px;
+    left: 40%;
+    background-color: white;
+    position: relative;
+    border-radius: 10%;
+  }
+
+  .calendar-close {
+    cursor: pointer;
+  }
+
+  .calendar-header {
+    margin-bottom: 20px;
+  }
+
+  .calendar-date-change {
+    font-size: 30px;
+    font-weight: bolder;
+    margin: 0 45px;
+    cursor: pointer;
+  }
+
+  .calendar-selector {
+    font-size: 30px;
+    font-weight: bolder;
+  }
+
+  .calendar-date-wrapper {
+    width: 50px;
+    display: inline-block;
+    padding: 10px 2px;
+    margin: 0 auto;
+    text-align: center;
+  }
+}

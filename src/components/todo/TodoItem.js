@@ -62,17 +62,13 @@ const Content = styled.div`
 function TodoItem({ id, done, title }) {
   const dispatch = useTodoDispatch();
   const onToggle = async () => {
-    console.log('toggle');
-    console.log(done);
     const response = await todoService.updateDone(id, !done);
-    console.log(response);
     if (response.status === 200) {
       dispatch({ type: 'TOGGLE', id });
     }
   };
   const onRemove = async () => {
     const response = await todoService.delete(id);
-    console.log(response);
     if (response.status === 200) {
       dispatch({ type: 'REMOVE', id });
     }
