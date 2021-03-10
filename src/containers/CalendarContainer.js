@@ -1,5 +1,4 @@
 import React from 'react';
-import CalendarDate from '../components/calendar/CalendarDate';
 import CalendarHead from '../components/calendar/CalendarHead';
 import CalendarTemplate from '../components/calendar/CalendarTemplate';
 import { useCalendarState } from '../context/calendar/CalendarContext';

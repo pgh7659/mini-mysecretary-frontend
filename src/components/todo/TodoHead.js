@@ -61,7 +61,6 @@ function TodoHead() {
   const undoneTodos = todoState.filter((todo) => !todo.done);
 
   const calendarDispatch = useCalendarDispatch();
-  console.log(calendarDispatch);
   const onClick = () => {
     calendarDispatch({ type: 'TOGGLE' });
   };

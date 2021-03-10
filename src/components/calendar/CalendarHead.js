@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { MdClose } from 'react-icons/md';
 import {
   useCalendarDispatch,
   useCalendarState,
 } from '../../context/calendar/CalendarContext';
 import { calendarUtils } from '../../lib/utils/calendarUtils';
 import CalendarDate from './CalendarDate';
+import closeImg from './ico_close.png';
 
 function CalendarHead() {
   const { selectedYear, selectedMonth } = useCalendarState();
@@ -31,8 +31,8 @@ function CalendarHead() {
   return (
     <>
       <div className="calendar-header">
-        <div className="calendar-close" onClick={closeModal}>
-          <MdClose />
+        <div className="calendar-close">
+          <button onClick={closeModal}><img src={closeImg} alt="close"/></button>
         </div>
         <div className="calendar-selector">
           <span className="calendar-date-change" onClick={clickForPrevMonth}>

@@ -4,7 +4,7 @@ const today = new Date();
 const initialState = {
   open: false,
   selectedYear: today.getFullYear(),
-  selectedMonth: today.getMonth(),
+  selectedMonth: today.getMonth() + 1,
   selectedDate: today.getDate(),
   selectedDay: today.getDay(),
 };

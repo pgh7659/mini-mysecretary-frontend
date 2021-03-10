@@ -1,14 +1,14 @@
 export const calendarUtils = {
   getFormattedDate: function (year, month, date = undefined) {
     if (date) {
-      return new Date(year, month, date).toLocaleDateString('ko-KR', {
+      return new Date(year, month - 1, date).toLocaleDateString('ko-KR', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
       });
     }
 
-    return new Date(year, month).toLocaleDateString('ko-KR', {
+    return new Date(year, month - 1).toLocaleDateString('ko-KR', {
       year: 'numeric',
       month: 'long',
     });
