@@ -28,7 +28,7 @@ function CalendarHead() {
 
   const dateList = calendarUtils.getDateListForTheMonth(
     selectedYear,
-    selectedMonth + monthValue
+    selectedMonth + monthValue,
   );
 
   const onClickToCalendarDate = (date) => {
@@ -49,18 +49,22 @@ function CalendarHead() {
           </button>
         </div>
         <div className="calendar-selector">
-          <span className="calendar-date-change" onClick={clickForPrevMonth}>
-            {'<'}
-          </span>
-          <span>
+          <div className="side-btns">
+            <span className="side-btns-left" onClick={clickForPrevMonth}>
+              <i className="fas fa-angle-left"></i>
+            </span>
+          </div>
+          <h3>
             {calendarUtils.getFormattedYearMonthKokr(
               selectedYear,
-              selectedMonth + monthValue
+              selectedMonth + monthValue,
             )}
-          </span>
-          <span className="calendar-date-change" onClick={clickForNextMonth}>
-            {'>'}
-          </span>
+          </h3>
+          <div className="side-btns">
+            <span className="side-btns-right" onClick={clickForNextMonth}>
+              <i className="fas fa-angle-right"></i>
+            </span>
+          </div>
         </div>
       </div>
       <div className="calendar-date-list">

@@ -7,6 +7,7 @@ import {
 import { useTodoState } from '../../context/todo/TodoContext';
 
 const TodoHeaderBlock = styled.div`
+  height: 100%;
   padding-top: 48px;
   padding-left: 32px;
   padding-right: 32px;
@@ -101,7 +102,7 @@ function TodoHead() {
 
   const onChangeDate = (e) => {
     const changeTypes = e.target.classList[e.target.classList.length - 1].split(
-      '-'
+      '-',
     );
     switch (changeTypes[changeTypes.length - 1]) {
       case 'left':

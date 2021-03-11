@@ -23,9 +23,7 @@
   }
 
   .calendar-close {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    margin-top: -20px;
 
     button {
       border: none;
@@ -35,24 +33,42 @@
       height: 40px;
       color: white;
       border-radius: 50%;
-      // transform: rotate(45deg);
-      font-size: 30px;
+      font-size: 40px;
+      padding: 0;
+
+      &:hover {
+        background-color: #ff8787;
+      }
+      svg {
+        transform: rotate(45deg);
+      }
     }
   }
 
   .calendar-header {
+    text-align: center;
+    border-bottom: 1px solid;
     margin-bottom: 20px;
   }
 
   .calendar-selector {
     font-size: 30px;
     font-weight: bolder;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 10px;
 
-    .calendar-date-change {
-      font-size: 30px;
-      font-weight: bolder;
+    h3 {
       margin: 0 auto;
+    }
+
+    .side-btns > span {
       cursor: pointer;
+      transform: translatey(-50%);
+      opacity: 0.5;
+      padding: 1px 13px;
+      border-radius: 50px;
+      font-size: 40px;
     }
   }
 
