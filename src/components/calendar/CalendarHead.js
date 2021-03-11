@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
+import { MdAdd } from 'react-icons/md';
 import {
   useCalendarDispatch,
   useCalendarState,
 } from '../../context/calendar/CalendarContext';
 import { calendarUtils } from '../../lib/utils/calendarUtils';
 import CalendarDate from './CalendarDate';
-import closeImg from './ico_close.png';
 
 function CalendarHead() {
-  const { selectedYear, selectedMonth } = useCalendarState();
-  const [monthValue, setMonthValue] = useState(selectedMonth);
+  const { selectedDate } = useCalendarState();
+  const selectedYear = selectedDate.getFullYear();
+  const selectedMonth = selectedDate.getMonth();
+
   const calendarDispatch = useCalendarDispatch();
   const closeModal = () => {
     calendarDispatch({ type: 'TOGGLE' });
   };
 
+  const [monthValue, setMonthValue] = useState(0);
   const clickForNextMonth = () => {
     setMonthValue(monthValue + 1);
   };
@@ -25,21 +28,35 @@ function CalendarHead() {
 
   const dateList = calendarUtils.getDateListForTheMonth(
     selectedYear,
-    monthValue
+    selectedMonth + monthValue
   );
+
+  const onClickToCalendarDate = (date) => {
+    calendarDispatch({
+      type: 'SELECT_DATE',
+      dateValue: new Date(selectedYear, selectedMonth + monthValue, date),
+    });
+
+    calendarDispatch({ type: 'TOGGLE' });
+  };
 
   return (
     <>
       <div className="calendar-header">
         <div className="calendar-close">
-          <button onClick={closeModal}><img src={closeImg} alt="close"/></button>
+          <button onClick={closeModal}>
+            <MdAdd />
+          </button>
         </div>
         <div className="calendar-selector">
           <span className="calendar-date-change" onClick={clickForPrevMonth}>
             {'<'}
           </span>
           <span>
-            {calendarUtils.getFormattedDate(selectedYear, monthValue)}
+            {calendarUtils.getFormattedYearMonthKokr(
+              selectedYear,
+              selectedMonth + monthValue
+            )}
           </span>
           <span className="calendar-date-change" onClick={clickForNextMonth}>
             {'>'}
@@ -54,7 +71,11 @@ function CalendarHead() {
         ))}
       </div>
 
-      <CalendarDate dateList={dateList} />
+      <CalendarDate
+        dateList={dateList}
+        onClick={onClickToCalendarDate}
+        selectedDate={selectedDate.getDate()}
+      />
     </>
   );
 }

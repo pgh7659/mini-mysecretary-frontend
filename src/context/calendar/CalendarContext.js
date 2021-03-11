@@ -1,29 +1,27 @@
 import React, { createContext, useContext, useReducer } from 'react';
 
-const today = new Date();
 const initialState = {
   open: false,
-  selectedYear: today.getFullYear(),
-  selectedMonth: today.getMonth() + 1,
-  selectedDate: today.getDate(),
-  selectedDay: today.getDay(),
+  selectedDate: new Date(),
 };
 
 function calendarReducer(state, action) {
   switch (action.type) {
     case 'TOGGLE':
       return { ...state, open: !state.open };
-    case 'CHANGE_MONTH':
+    case 'SELECT_DATE':
       return {
         ...state,
-        selectedYear: action.selectedYear,
-        selectedMonth: action.selectedMonth,
+        selectedDate: action.dateValue,
       };
     case 'CHANGE_DATE':
       return {
         ...state,
-        selectedDate: action.selectedDate,
-        selectedDay: action.selectedDate,
+        selectedDate: new Date(
+          state.selectedDate.setDate(
+            state.selectedDate.getDate() + action.dateValue
+          )
+        ),
       };
     default:
       throw new Error(`Unhandled action type: ${action.type}`);

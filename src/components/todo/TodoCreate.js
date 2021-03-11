@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { MdAdd } from 'react-icons/md';
 import styled, { css } from 'styled-components';
+import { useCalendarState } from '../../context/calendar/CalendarContext';
 import { useTodoDispatch } from '../../context/todo/TodoContext';
 import todoService from '../../lib/axios/service/todoService';
+import { calendarUtils } from '../../lib/utils/calendarUtils';
 
 const CircleButton = styled.button`
   background: #38d9a9;
@@ -91,6 +93,7 @@ function TodoCreate() {
   const [value, setValue] = useState('');
 
   const dispatch = useTodoDispatch();
+  const { selectedYear, selectedMonth, selectedDate } = useCalendarState();
 
   const onToggle = () => setOpen(!open);
   const onChange = (e) => setValue(e.target.value);
@@ -101,6 +104,11 @@ function TodoCreate() {
 
     const todo = {
       title: value,
+      date: calendarUtils.getFormattedDateForFrca(
+        selectedYear,
+        selectedMonth,
+        selectedDate
+      ),
     };
 
     const response = await todoService.save(todo);

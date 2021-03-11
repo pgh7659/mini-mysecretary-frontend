@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useCalendarState } from '../../context/calendar/CalendarContext';
 import { useTodoDispatch, useTodoState } from '../../context/todo/TodoContext';
 import todoService from '../../lib/axios/service/todoService';
+import { calendarUtils } from '../../lib/utils/calendarUtils';
 import TodoItem from './TodoItem';
 
 const TodoListBlock = styled.div`
@@ -12,17 +14,20 @@ const TodoListBlock = styled.div`
 `;
 
 function TodoList() {
+  const { selectedDate } = useCalendarState();
   const dispatch = useTodoDispatch();
   useEffect(() => {
     const getList = async () => {
-      const response = await todoService.getList();
+      const response = await todoService.getList(
+        calendarUtils.getFormattedDateForFrca(selectedDate)
+      );
       if (response.status === 200) {
         dispatch({ type: 'GET_LIST', todos: response.data });
       }
     };
 
     getList();
-  }, []);
+  }, [selectedDate]);
 
   const todos = useTodoState();
 

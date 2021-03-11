@@ -1,21 +1,26 @@
 export const calendarUtils = {
-  getFormattedDate: function (year, month, date = undefined) {
-    if (date) {
-      return new Date(year, month - 1, date).toLocaleDateString('ko-KR', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      });
-    }
-
-    return new Date(year, month - 1).toLocaleDateString('ko-KR', {
+  getDateObject: function (year, month, date) {
+    return new Date(year, month - 1, date);
+  },
+  getFormattedDateForFrca: function (date) {
+    return date.toLocaleDateString('fr-ca');
+  },
+  getFormattedDateForKokr: function (date) {
+    return date.toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  },
+  getFormattedYearMonthKokr: function (year, month) {
+    return new Date(year, month).toLocaleDateString('ko-KR', {
       year: 'numeric',
       month: 'long',
     });
   },
   getDateListForTheMonth: function (selectedYear, selectedMonth) {
-    const startDate = new Date(selectedYear, selectedMonth - 1, 1);
-    const endDate = new Date(selectedYear, selectedMonth, 0);
+    const startDate = new Date(selectedYear, selectedMonth, 1);
+    const endDate = new Date(selectedYear, selectedMonth + 1, 0);
 
     const dateArray = [
       ...new Array(startDate.getDay()).fill(-1),
