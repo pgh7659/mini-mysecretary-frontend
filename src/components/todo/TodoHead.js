@@ -102,7 +102,7 @@ function TodoHead() {
 
   const onChangeDate = (e) => {
     const changeTypes = e.target.classList[e.target.classList.length - 1].split(
-      '-',
+      '-'
     );
     switch (changeTypes[changeTypes.length - 1]) {
       case 'left':

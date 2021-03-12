@@ -28,7 +28,7 @@ function CalendarHead() {
 
   const dateList = calendarUtils.getDateListForTheMonth(
     selectedYear,
-    selectedMonth + monthValue,
+    selectedMonth + monthValue
   );
 
   const onClickToCalendarDate = (date) => {
@@ -57,7 +57,7 @@ function CalendarHead() {
           <h3>
             {calendarUtils.getFormattedYearMonthKokr(
               selectedYear,
-              selectedMonth + monthValue,
+              selectedMonth + monthValue
             )}
           </h3>
           <div className="side-btns">
@@ -78,7 +78,7 @@ function CalendarHead() {
       <CalendarDate
         dateList={dateList}
         onClick={onClickToCalendarDate}
-        selectedDate={selectedDate.getDate()}
+        selectedDate={monthValue === 0 ? selectedDate.getDate() : null}
       />
     </>
   );

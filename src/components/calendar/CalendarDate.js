@@ -6,7 +6,9 @@ function CalendarDate({ dateList, selectedDate, onClick }) {
       {dateList.map((week) => {
         return week.map((date, index) => (
           <div
-            className={`calendar-date-wrapper ${date > 0 ? 'date' : ''}`}
+            className={`calendar-date-wrapper ${date > 0 ? 'date' : ''} ${
+              selectedDate && selectedDate === date ? 'selected' : ''
+            }`}
             onClick={date > 0 ? () => onClick(date) : null}
             key={date > 0 ? date : week + '' + index}
           >
