@@ -28,7 +28,7 @@ function TodoList() {
     const getList = async () => {
       loadingDispatch({ type: 'CREATE' });
       const response = await todoService.getList(
-        calendarUtils.getFormattedDateForFrca(selectedDate)
+        calendarUtils.getFormattedDateForFrca(selectedDate),
       );
 
       if (response.status === 200) {
