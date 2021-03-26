@@ -24,7 +24,7 @@ function LoginButton({ provider, src, onClick }) {
   );
 }
 
-function Login() {
+export default function Login() {
   localStorage.removeItem('token');
 
   const login = (e) => {
@@ -49,5 +49,3 @@ function Login() {
     </LoginDivBlock>
   );
 }
-
-export default Login;
