@@ -93,22 +93,20 @@ function TodoCreate() {
   const [value, setValue] = useState('');
 
   const dispatch = useTodoDispatch();
-  const { selectedYear, selectedMonth, selectedDate } = useCalendarState();
+  const { selectedDate } = useCalendarState();
 
   const onToggle = () => setOpen(!open);
   const onChange = (e) => setValue(e.target.value);
   const onCreate = async (e) => {
-    if (e.type === 'keyup' && e.key !== 'Enter') {
+    if (e.type === 'keypress' && e.key !== 'Enter') {
+      return;
+    } else if (!value.trim()) {
       return;
     }
 
     const todo = {
       title: value,
-      date: calendarUtils.getFormattedDateForFrca(
-        selectedYear,
-        selectedMonth,
-        selectedDate
-      ),
+      date: calendarUtils.getFormattedDateForFrca(selectedDate),
     };
 
     const response = await todoService.save(todo);
@@ -132,7 +130,7 @@ function TodoCreate() {
               autoFocus
               placeholder="내용을 입력 후, Enter를 누르세요."
               onChange={onChange}
-              onKeyUp={onCreate}
+              onKeyPress={onCreate}
               value={value}
             />
             <InsertButton onClick={onCreate}>Enter</InsertButton>
