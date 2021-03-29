@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+## 프로젝트 명 : MySecretary
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> [Mysecretary Service URL](http://ec2-13-209-26-145.ap-northeast-2.compute.amazonaws.com/, 'project')
 
-## Available Scripts
+> back-end project git address: [Mysecretary_back_gitrepository](https://github.com/pgh7659/mini-mySecretary-backend/, 'back link')
 
-In the project directory, you can run:
+---
 
-### `yarn start`
+#### 개요
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+SNS계정(google, naver)으로 일자별로 나만의 TODO LIST를 관리하는 서비스입니다.
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `yarn test`
+#### 프로젝트 목표
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. 달력 생성
 
-### `yarn build`
+   - Date() 함수를 활용하여 calendar-modal 생성
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. todo list
+   - 조회 - 선택된 날짜의 목록 표출
+   - 생성 - +버튼을 통해 새로운 todo 생성
+   - 수정 - 체크박스 선택을 통해 완료여부 변경
+   - 삭제 - hover 시, delete 아이콘 표출 및 클릭 시 삭제
+3. AWS EC2에 배포하기
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   - nginx 활용
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `yarn eject`
+#### stack
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- react(hook, contextAPI, styled-component, axios 활용)
+- nginx
