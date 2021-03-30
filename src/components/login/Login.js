@@ -29,7 +29,7 @@ export default function Login() {
 
   const login = (e) => {
     const provider = e.target.attributes['provider'].value;
-    window.location = `http://3.36.218.34:8080/oauth2/authorize/${provider}?redirect_uri=http://3.36.218.34/login/callback`;
+    window.location = `http://ec2-3-36-218-34.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorize/${provider}?redirect_uri=http://ec2-3-36-218-34.ap-northeast-2.compute.amazonaws.com/login/callback`;
   };
 
   const providers = [
