@@ -2,7 +2,7 @@
 
 > [Mysecretary Service URL](http://ec2-3-36-218-34.ap-northeast-2.compute.amazonaws.com/, 'project')
 
-> back-end project git address: [Mysecretary_back_gitrepository](https://github.com/pgh7659/mini-mySecretary-backend/, 'back link')
+> back-end project git address: [Mysecretary_back_gitrepository](https://github.com/pgh7659/mini-mySecretary-backend)
 
 ---
 
