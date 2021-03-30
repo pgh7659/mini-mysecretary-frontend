@@ -1,6 +1,6 @@
 ## 프로젝트 명 : MySecretary
 
-> [Mysecretary Service URL](http://ec2-13-209-26-145.ap-northeast-2.compute.amazonaws.com/, 'project')
+> [Mysecretary Service URL](http://3.36.218.34/, 'project')
 
 > back-end project git address: [Mysecretary_back_gitrepository](https://github.com/pgh7659/mini-mySecretary-backend/, 'back link')
 
